@@ -1,4 +1,3 @@
-// const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -12,6 +11,7 @@ const requestLogger = (request, response, next) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('build'));
 app.use(requestLogger);
 
 let notes = [
@@ -41,11 +41,6 @@ const generateId = () => {
     : 0;
   return maxId + 1;
 };
-
-// const app = http.createServer((request, response) => {
-//   response.writeHead(200, { 'Content-Type': 'application/json' });
-//   response.end(JSON.stringify(notes));
-// });
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>');
