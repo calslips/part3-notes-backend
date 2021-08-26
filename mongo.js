@@ -37,56 +37,9 @@ const note = new Note({
 //   mongoose.connection.close();
 // });
 
-// Note.find({}).exec().then((result) => {
-//   // console.log('Total Find result:', result);
-//   result.forEach((note) => {
-//     console.log(note);
-//   });
-//   mongoose.connection.close()
-// })
-// // .then(
-// //   mongoose.connection.close()
-// // )
-// .catch((err) => {
-//   console.error(err);
-// });
-
-Note.find({})
-  .then(result => {
-    result.forEach(note => {
-      console.log(note)
-    })
-    mongoose.connection.close()
-  })
-  // .catch(err => console.log(err))
-
-// Note.find({})
-//   .exec((result) => {
-//     console.log(result)
-//     mongoose.connection.close()
-//   })
-  // .catch(err => console.log('### FIND ERROR:', err))
-
-// const query = Note.find({ important: false })
-// query.then(result => {
-//   console.log(result)
-//   mongoose.connection.close()
-// })
-// console.log(query);
-// mongoose.connection.close()
-
-// .then(result => {
-//   result.forEach(note => {
-//     console.log(note)
-//   })
-//   mongoose.connection.close()
-// })
-
-// Note.find({}, function (err, docs) {
-//   if (err) {
-//     return console.log('### FIND ERROR', err)
-//   }
-//   console.log(docs)
-//   mongoose.connection.close()
-// })
-// .then(mongoose.connection.close());
+Note.find({}).then((result) => {
+  result.forEach((note) => {
+    console.log(note);
+  });
+  mongoose.connection.close();
+});
