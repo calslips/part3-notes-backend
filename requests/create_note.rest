@@ -1,3 +1,4 @@
+### successful POST req of note
 POST http://localhost:3001/api/notes
 Content-Type: application/json
 
