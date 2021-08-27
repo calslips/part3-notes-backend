@@ -1,0 +1,2 @@
+### successful GET req of single note
+GET http://localhost:3001/api/notes/612685856c779f1a22f98a54
