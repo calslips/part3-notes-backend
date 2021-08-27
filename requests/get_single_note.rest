@@ -1,2 +1,8 @@
 ### successful GET req of single note
 GET http://localhost:3001/api/notes/612685856c779f1a22f98a54
+
+### unsuccessful GET req of single note due to non-existent id
+GET http://localhost:3001/api/notes/6127deab3c9b1c4897fa6fb2
+
+### unsuccessful GET req of single note due to incorrect id format
+GET http://localhost:3001/api/notes/21313notarealid3218
