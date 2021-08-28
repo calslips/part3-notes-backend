@@ -1,0 +1,8 @@
+### successful DELETE req of note
+DELETE http://localhost:3001/api/notes/<REPLACE WITH ID OF NOTE TO DELETE>
+
+### unsuccessful DELETE req of note, does not exist
+DELETE http://localhost:3001/api/notes/612837c64eb5244511d50653
+
+### unsuccessful DELETE req, invalid id format
+DELETE http://localhost:3001/api/notes/321notarealid0987

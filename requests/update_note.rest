@@ -1,0 +1,27 @@
+### successful PUT req of single note
+PUT http://localhost:3001/api/notes/612837f44eb5244511d50656
+Content-Type: application/json
+
+{
+  "content": "a misc note",
+  "important": false
+}
+
+### implementation not necessary, only existing notes with valid ids update
+# ### unsuccessful PUT req of single note, does not exist
+# PUT http://localhost:3001/api/notes/6127acc5f9ac9387bbb482b0
+# Content-Type: application/json
+
+# {
+#   "content": "cannot update what does not exist",
+#   "important": true
+# }
+
+# ### unsuccessful PUT req of single note, invalid id format
+# PUT http://localhost:3001/api/notes/678notarealid321
+# Content-Type: application/json
+
+# {
+#   "content": "bad id leads to bad request",
+#   "important": true
+# }
