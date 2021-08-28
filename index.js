@@ -17,10 +17,10 @@ app.use(express.json());
 app.use(express.static("build"));
 app.use(requestLogger);
 
-const generateId = () => {
-  const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
-  return maxId + 1;
-};
+// const generateId = () => {
+//   const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
+//   return maxId + 1;
+// };
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
@@ -43,15 +43,26 @@ app.get("/api/notes/:id", (request, response, next) => {
         response.status(404).end();
       }
     })
-    .catch((error) => next(error));
+    .catch(next);
+    // .catch((error) => next(error));
   // note ? response.json(note) : response.status(404).end();
 });
 
-app.delete("/api/notes/:id", (request, response) => {
-  const id = Number(request.params.id);
-  notes = notes.filter((note) => note.id !== id);
+app.delete("/api/notes/:id", (request, response, next) => {
+  // const id = Number(request.params.id);
+  // notes = notes.filter((note) => note.id !== id);
+  Note.findByIdAndRemove(request.params.id)
+    .then((result) => {
+      if (result) {
+        response.status(204).end();
+      } else {
+        response.status(404).end();
+      }
+    })
+    .catch(next);
+    // .catch((error) => next(error));
 
-  response.status(204).end();
+  // response.status(204).end();
 });
 
 app.post("/api/notes", (request, response) => {
@@ -81,6 +92,30 @@ app.post("/api/notes", (request, response) => {
   });
 
   // response.status(201).json(notes);
+});
+
+app.put("/api/notes/:id", (request, response, next) => {
+  const body = request.body;
+
+  const note = {
+    content: body.content,
+    important: body.important,
+  };
+
+  Note.findByIdAndUpdate(request.params.id, note, { new: true })
+    .then((updatedNote) => {
+      // Note.findById(request.params.id)
+      //   .then((existingNote) => {
+      //     console.log('NOTE EXISTS RETURN', existingNote);
+      //     if (!existingNote) {
+      //       return response.status(404).end();
+      //     }
+      //     response.json(updatedNote);
+      //   });
+      response.json(updatedNote);
+    })
+    .catch(next);
+    // .catch((error) => next(error));
 });
 
 const unknownEndpoint = (request, response) => {
