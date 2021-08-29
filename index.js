@@ -22,9 +22,9 @@ app.use(requestLogger);
 //   return maxId + 1;
 // };
 
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
-});
+// app.get("/", (request, response) => {
+//   response.send("<h1>Hello World!</h1>");
+// });
 
 app.get("/api/notes", (request, response) => {
   Note.find({}).then((notes) => {
@@ -65,7 +65,7 @@ app.delete("/api/notes/:id", (request, response, next) => {
   // response.status(204).end();
 });
 
-app.post("/api/notes", (request, response) => {
+app.post("/api/notes", (request, response, next) => {
   const body = request.body;
 
   if (!body.content) {
@@ -89,7 +89,8 @@ app.post("/api/notes", (request, response) => {
   // notes = notes.concat(note);
   note.save().then((savedNote) => {
     response.status(201).json(savedNote);
-  });
+  })
+  .catch(next);
 
   // response.status(201).json(notes);
 });
@@ -129,6 +130,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' });
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message });
   }
 
   next(error);
