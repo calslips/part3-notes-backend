@@ -6,3 +6,29 @@ Content-Type: application/json
   "content": "VS Code REST client is pretty good",
   "important": false
 }
+
+### unsuccessful POST req of note, missing content
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "important": false
+}
+
+### unsuccessful POST req of note, empty content
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "content": "",
+  "important": false
+}
+
+### unsuccessful POST req of note, content does not meet min required length
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "content": "1234",
+  "important": true
+}
