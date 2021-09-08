@@ -1,11 +1,49 @@
+### successful POST req of note, utilizing tokens & authorization
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: Bearer <replace with token>
+
+{
+  "content": "Single Page Apps use token authentication",
+  "important": true
+}
+
+# ### unsuccessful POST req of note, utilizing tokens & authorization
+# POST http://localhost:3001/api/notes
+# Content-Type: application/json
+# Authorization: Bearer
+
+# {
+#   "content": "Unauthorized note creation",
+#   "important": false
+# }
+
 ### successful POST req of note
 POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-  "content": "VS Code REST client is pretty good",
-  "important": false
+  "content": "It's a doggy dog world",
+  "important": false,
+  "userId": "61363a8b5b7b7b3b30dd7dc5"
 }
+
+# {
+#   "content": "Paper thin puppy rapper in the hizzouse!",
+#   "important": false,
+#   "userId": "61363a8b5b7b7b3b30dd7dc5"
+# }
+
+# {
+#   "content": "User id of note creator is initially sent with the request",
+#   "important": true,
+#   "userId": "61359b0ac2c0ff32ae3780fc"
+# }
+
+# {
+#   "content": "VS Code REST client is pretty good",
+#   "important": false
+# }
 
 ### unsuccessful POST req of note, missing content
 POST http://localhost:3001/api/notes
