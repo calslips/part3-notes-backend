@@ -4,11 +4,8 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 const getTokenFrom = (request) => {
-  console.log('### getTokenFrom arg request:', request);
   const authorization = request.get('authorization');
-  console.log('### getTokenFrom auth header:', authorization);
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    console.log('### getTokenFrom coded token value:', authorization.substring(7));
     return authorization.substring(7);
   }
   return null;
